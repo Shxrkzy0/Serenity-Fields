@@ -1,6 +1,9 @@
 #To push changes to github:
 #   git add . (Selects all files)
 #   git commit -m "describe what you changed" (Keep the quotation)
+#      if commit doesn't work, try:
+#         git config --global user.name "Antoni Pantak"
+#         git config --global user.email "antonipantk@gmail.com"
 #   git push (Updates all files)
 #
 #If you are on a new device:
@@ -9,31 +12,27 @@
 #If you are switching devices:
 #   git pull (Applies most recent changes to the current device)
 
-
-
 import pygame
 import sys
+from game.grass import grassGrid
 
-#Creates the main window
+#Main window
 pygame.init()
-size = (1280,720)
+size = (1280,720) #720p minimum resolution, must be divisible by 16 for the grass tiles to fit properly
 screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Serenity Fields")
 clock = pygame.time.Clock()
 
 #Grass tiles
-TILE = 16
-grid = [[False] * 80 for _ in range (45)]
+grass = grassGrid()
 
 #Core game loop
 while True:
-    for y in range(45):
-        for x in range(80):
-            if grid[y][x] == False:
-                pygame.draw.rect(screen, (48, 138, 57), (x*TILE,y*TILE,TILE,TILE))
-            else:
-                pygame.draw.rect(screen, (102, 252, 116), (x*TILE,y*TILE,TILE,TILE))
+    clock.tick(60) #Limits the game to 60 frames per second
+    screen.fill((0,0,0))
+    grass.draw(screen)
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            pygame.quit() #Closes the game window
+            sys.exit() #Exits the program
