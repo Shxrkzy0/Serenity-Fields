@@ -14,7 +14,7 @@
 
 import pygame
 import sys
-from game.grass import grassGrid
+from grass import grassGrid
 
 #Main window
 pygame.init()
