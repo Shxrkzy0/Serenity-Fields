@@ -15,10 +15,14 @@
 import pygame
 import sys
 from grass import grassGrid
+from player import player
+from animal import spawnAnimal, addAnimalToCollection, animalCollection
+from items import spawnBerry, addBerryToInventory, berryInventory
+from encounter import encounter
 
 #Main window
 pygame.init()
-size = (1280,720) #720p minimum resolution, must be divisible by 16 for the grass tiles to fit properly
+size = (1280,720) #720p minimum resolution
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Serenity Fields")
 clock = pygame.time.Clock()
@@ -27,12 +31,18 @@ clock = pygame.time.Clock()
 grass = grassGrid()
 
 #Core game loop
+p = player(640, 360) #Starting position of the player
 while True:
     clock.tick(60) #Limits the game to 60 frames per second
     screen.fill((0,0,0))
     grass.draw(screen)
-    pygame.display.flip()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit() #Closes the game window
             sys.exit() #Exits the program
+
+    keys = pygame.key.get_pressed()
+    p.move(keys)
+    p.draw(screen)
+    pygame.display.flip()

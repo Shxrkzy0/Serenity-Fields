@@ -1,5 +1,5 @@
 import pygame
-TILE = 16
+TILE = 32
 COLS = 80
 ROWS = 45
 
@@ -17,3 +17,4 @@ class grassGrid:
             for x in range(COLS):
                 colour = (48, 138, 57) if self.grid[y][x] == False else (102, 252, 116)
                 pygame.draw.rect(screen, colour, (x*TILE, y*TILE, TILE, TILE)) #Draw the grass tile
+                pygame.draw.rect(screen, (0, 0, 0), (x*TILE, y*TILE, TILE, TILE), 1) #Draw the grid lines
