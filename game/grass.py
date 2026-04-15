@@ -8,6 +8,7 @@ class grassGrid:
     def __init__(self):
         self.grid = [[False] * COLS for _ in range(ROWS)] # False = uncut, True = cut
 
+
     def cut(self, x, y):
         if 0 <= x < COLS and 0 <= y < ROWS: #Checking bounds
             self.grid[y][x] = True

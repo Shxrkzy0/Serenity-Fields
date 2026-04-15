@@ -7,6 +7,7 @@ except ImportError:
     from .items import Berries, spawnBerry, berryInventory
 
 
+#Base catch chances for each rarity tier
 BASE_CATCH_CHANCE = {
     "Common": 0.7, #70%
     "Uncommon": 0.5, #50%
@@ -14,6 +15,7 @@ BASE_CATCH_CHANCE = {
     "Epic": 0.15, #15%
     "Legendary": 0.05 #5%
 }
+
 
 #Catching animals with cap of 95% catch chance
 def attemptCatch(animal, berry=None, catchBuff=0):
@@ -71,14 +73,9 @@ def encounter(catchBuff=0):
         if attemptCatch(animal, berry=berry, catchBuff=catchBuff):
             print(f"You caught the {animal['name']}!")
             return animal
-        else:
-            print(f"The {animal['name']} got away...")
-            return None
-    else:
+    elif choice == "4":
         print(f"You released the {animal['name']}.")
         return None
-    
-
-if __name__ == "__main__":
-    result = encounter()
-    print("Encounter result:", result)
+    else:
+        print("Invalid choice.")
+        return encounter(catchBuff=catchBuff)
